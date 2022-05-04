@@ -10,7 +10,7 @@ class Matches extends Model {
   public homeTeamGoals!: number;
   public awayTeam!: number;
   public awayTeamGoals!: number;
-  public inProgress!: number;
+  public inProgress!: boolean;
 }
 
 Matches.init({
@@ -33,7 +33,7 @@ Matches.init({
     type: DataTypes.INTEGER,
   },
   inProgress: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.BOOLEAN,
   }
 }, {
   // ... Outras configs
