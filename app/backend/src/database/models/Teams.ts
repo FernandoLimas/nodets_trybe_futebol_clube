@@ -5,7 +5,7 @@ import db from '.';
 class Teams extends Model {
   // public <campo>!: <tipo>;
   public id!: number;
-  public team_name!: string;
+  public teamName!: string;
 }
 
 Teams.init({
@@ -15,7 +15,7 @@ Teams.init({
     primaryKey: true,
     autoIncrement: true
   },
-  team_name: {
+  teamName: {
     type: DataTypes.STRING,
     allowNull: false
   }  
