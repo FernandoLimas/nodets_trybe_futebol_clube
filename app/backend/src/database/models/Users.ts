@@ -2,7 +2,7 @@ import { Model, DataTypes } from 'sequelize';
 import db from '.';
 // import OtherModel from './OtherModel';
 
-class User extends Model {
+class Users extends Model {
   // public <campo>!: <tipo>;
   public id!: number;
   public username!: string;
@@ -11,7 +11,7 @@ class User extends Model {
   public password!: string;
 }
 
-User.init({
+Users.init({
   // ... Campos
   id: {
     type: DataTypes.INTEGER,
@@ -40,8 +40,8 @@ User.init({
   underscored: true,
   sequelize: db,
   // modelName: 'example',
-  modelName: 'User',
+  modelName: 'Users',
   timestamps: false,
 });
 
-export default User;
+export default Users;
