@@ -5,9 +5,13 @@ import db from '.';
 class Users extends Model {
   // public <campo>!: <tipo>;
   public id!: number;
+
   public username!: string;
+
   public role!: string;
+
   public email!: string;
+
   public password!: string;
 }
 
@@ -16,25 +20,24 @@ Users.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   username: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   role: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   email: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: false
-  }
-    
+    allowNull: false,
+  },
 }, {
   // ... Outras configs
   underscored: true,

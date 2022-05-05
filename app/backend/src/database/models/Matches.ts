@@ -6,10 +6,15 @@ import Teams from './Teams';
 class Matches extends Model {
   // public <campo>!: <tipo>;
   public id!: number;
+
   public homeTeam!: number;
+
   public homeTeamGoals!: number;
+
   public awayTeam!: number;
+
   public awayTeamGoals!: number;
+
   public inProgress!: boolean;
 }
 
@@ -18,7 +23,7 @@ Matches.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   homeTeam: {
     type: DataTypes.INTEGER,
@@ -50,6 +55,5 @@ Matches.belongsTo(Teams, { foreignKey: 'awayTeam', as: 'teamAway' });
 
 Teams.hasMany(Matches, { foreignKey: 'homeTeam', as: 'HomeMatch' });
 Teams.hasMany(Matches, { foreignKey: 'awayTeam', as: 'AwayMatch' });
-
 
 export default Matches;

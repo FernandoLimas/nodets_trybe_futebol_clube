@@ -5,6 +5,7 @@ import db from '.';
 class Teams extends Model {
   // public <campo>!: <tipo>;
   public id!: number;
+
   public teamName!: string;
 }
 
@@ -13,12 +14,12 @@ Teams.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   teamName: {
     type: DataTypes.STRING,
-    allowNull: false
-  }  
+    allowNull: false,
+  },
 }, {
   // ... Outras configs
   underscored: true,
