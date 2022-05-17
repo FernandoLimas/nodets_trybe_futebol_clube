@@ -39,7 +39,7 @@ Matches.init({
   },
   inProgress: {
     type: DataTypes.BOOLEAN,
-  }
+  },
 }, {
   // ... Outras configs
   underscored: true,
