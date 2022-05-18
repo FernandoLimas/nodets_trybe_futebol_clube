@@ -8,6 +8,7 @@ class App {
     // ...
     this.app = express();
     this.config();
+    this.router();
     // ...
   }
 
@@ -21,6 +22,12 @@ class App {
 
     this.app.use(accessControl);
     // ...
+  }
+
+  private router():void {
+    this.app.get('/ping', (_req, res) => {
+      res.json({ response: 'pong' });
+    });
   }
 
   // ...
