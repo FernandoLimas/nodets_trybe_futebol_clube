@@ -1,4 +1,5 @@
 import * as express from 'express';
+import { Touchscreen } from 'puppeteer';
 
 class App {
   public app: express.Express;
@@ -21,6 +22,7 @@ class App {
     };
 
     this.app.use(accessControl);
+    this.app.use(express.json());
     // ...
   }
 
