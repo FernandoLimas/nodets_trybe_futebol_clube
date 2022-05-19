@@ -4,6 +4,7 @@ import login from '../controllers/loginController';
 const loginRouter = Router();
 
 loginRouter.get('/ping', login);
-// loginRouter.post('/login', validateLogin, loginController);
+// loginRouter.get('/login', loginController);
+// loginRouter.post('/login/validate', validateLogin, loginController);
 
 export default loginRouter;
