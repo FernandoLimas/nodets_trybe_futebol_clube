@@ -1,22 +1,29 @@
 import * as bcrypt from 'bcrypt';
+import { readFile } from 'fs/promises';
+import * as JWT from 'jsonwebtoken';
 import Users from '../database/models/Users';
 
 export default class LoginService {
-  public static async createUser(email: string, password: string) {
+  public static async login(email: string, password: string) {
     const hasUser = await Users.findOne({ where: { email } });
     if (!hasUser) {
-      const hash = bcrypt.hashSync(password, 10);
-
-      const newUser = await Users.create({
-        email,
-        password: hash,
-      });
-      return newUser;
+      return false;
     }
-    return new Error('Usuário já existe!');
-  }
+    const hashValid = bcrypt.compareSync(password, hasUser.password);
+    if (!hashValid) {
+      return false;
+    }
+    const secretKey = await readFile('jwt.evaluation.key', 'utf-8');
 
-  public static matchPassword(passwordText: string, encrypted: string) {
-    return bcrypt.compareSync(passwordText, encrypted);
+    const token = JWT.sign({ data: hasUser.role }, secretKey, { expiresIn: '2h' });
+
+    return {
+      user: { id: hasUser.id,
+        username: hasUser.username,
+        email: hasUser.email,
+        role: hasUser.role,
+      },
+      token,
+    };
   }
 }
