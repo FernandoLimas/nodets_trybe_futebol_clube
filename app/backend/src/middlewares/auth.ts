@@ -8,17 +8,15 @@ const Auth = {
     const secretKey = readFileSync('jwt.evaluation.key', 'utf-8');
 
     if (req.headers.authorization) {
-      const [authType, token] = req.headers.authorization.split(' ');
+      const [, token] = req.headers.authorization;
 
-      if (authType === 'Bearer') {
-        // try {
-        const decoded = JWT.verify(token, secretKey as string);
+      // try {
+      const decoded = JWT.verify(token, secretKey as string);
 
-        if (decoded) {
-          success = true;
-        }
-        // } catch (error) {}
+      if (decoded) {
+        success = true;
       }
+      // } catch (error) {}
     }
     if (success) {
       next();
