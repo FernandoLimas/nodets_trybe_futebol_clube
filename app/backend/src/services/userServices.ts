@@ -11,6 +11,12 @@ export default class LoginService {
         email,
         password: hash,
       });
+      return newUser;
     }
+    return new Error('Usuário já existe!');
+  }
+
+  public static matchPassword(passwordText: string, encrypted: string) {
+    return bcrypt.compareSync(passwordText, encrypted);
   }
 }
