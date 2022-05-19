@@ -1,5 +1,5 @@
 import * as express from 'express';
-import routerLongin from './routes/loginRouter';
+import routerLogin from './routes/loginRouter';
 
 class App {
   public app: express.Express;
@@ -27,7 +27,7 @@ class App {
   }
 
   private router():void {
-    this.app.use(routerLongin);
+    this.app.use(routerLogin);
   }
 
   // ...
