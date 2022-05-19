@@ -10,10 +10,6 @@ export const loginController = async (req: Request, res: Response) => {
   if (email && password) {
     const login = await userService.login(email, password);
 
-    if (login && userService.matchPassword(password, login.password)) {
-      return true;
-    }
-
     return res.status(200).json(login);
   }
 
