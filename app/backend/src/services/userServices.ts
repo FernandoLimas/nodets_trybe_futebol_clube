@@ -6,6 +6,11 @@ export default class LoginService {
     const hasUser = await Users.findOne({ where: { email } });
     if (!hasUser) {
       const hash = bcrypt.hashSync(password, 10);
+
+      const newUser = await Users.create({
+        email,
+        password: hash,
+      });
     }
   }
 }

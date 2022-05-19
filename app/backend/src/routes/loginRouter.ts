@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import loginController from '../controllers/';
+import login from '../controllers/loginController';
 
 const loginRouter = Router();
 
-loginRouter.post('/login', validateLogin, loginController);
+loginRouter.get('/ping', login);
+// loginRouter.post('/login', validateLogin, loginController);
 
-export default loginController;
+export default loginRouter;

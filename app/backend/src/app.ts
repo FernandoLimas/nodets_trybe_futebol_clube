@@ -1,4 +1,5 @@
 import * as express from 'express';
+import routerLongin from './routes/loginRouter';
 
 class App {
   public app: express.Express;
@@ -26,9 +27,7 @@ class App {
   }
 
   private router():void {
-    this.app.get('/ping', (_req, res) => {
-      res.json({ response: 'pong' });
-    });
+    this.app.use(routerLongin);
   }
 
   // ...
