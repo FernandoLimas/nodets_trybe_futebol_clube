@@ -1,4 +1,6 @@
 import { Request, Response } from 'express';
+import { readFile } from 'fs/promises';
+import * as JWT from 'jsonwebtoken';
 import userService from '../services/userServices';
 
 export const ping = (req: Request, res: Response) => {
@@ -7,13 +9,27 @@ export const ping = (req: Request, res: Response) => {
 
 export const loginController = async (req: Request, res: Response) => {
   const { email, password } = req.body;
-  if (email && password) {
-    const login = await userService.login(email, password);
-
-    return res.status(200).json(login);
+  const login = await userService.login(email, password);
+  if (!login) {
+    return res.status(400).json({
+      message: 'Incorrect email or password',
+    });
   }
+  return res.status(200).json(login);
+};
 
-  return res.status(400).json({
-    message: 'Incorrect email or password',
-  });
+interface ILogin {
+  data: string;
+}
+
+export const ValidateLogin = async (req: Request, res: Response) => {
+  const token = req.headers.authorization;
+
+  if (!token) return res.status(401).json({ message: 'Token not found' });
+  const secretKey = await readFile('jwt.evaluation.key', 'utf-8');
+  const decoded = JWT.verify(token, secretKey) as ILogin;
+
+  if (decoded.data) {
+    return res.status(200).json(decoded.data);
+  }
 };

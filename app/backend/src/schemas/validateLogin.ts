@@ -14,13 +14,13 @@ const schemaLogin = joi.object({
 
 });
 
-const validateLogin: RequestHandler = (req, res, next) => {
-  const login = req.body;
-
-  const { error } = schemaLogin.validate(login);
-  if (error) return next(error);
-
-  return next();
+const validateLogin: RequestHandler = async (req, res, next) => {
+  try {
+    await schemaLogin.validateAsync(req.body);
+    return next();
+  } catch (error) {
+    return next(error);
+  }
 };
 
-export default { validateLogin };
+export default validateLogin;

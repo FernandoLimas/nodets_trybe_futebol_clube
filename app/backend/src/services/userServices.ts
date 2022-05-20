@@ -21,7 +21,7 @@ export default class LoginService {
       role: hasUser.role,
     };
 
-    const secretKey = await readFile('./jwt.evaluation.key', 'utf-8');
+    const secretKey = await readFile('jwt.evaluation.key', 'utf-8');
 
     const token = JWT.sign({ data: hasUser.role }, secretKey, { expiresIn: '2h' });
 

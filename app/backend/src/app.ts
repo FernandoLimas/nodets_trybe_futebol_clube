@@ -1,4 +1,5 @@
 import * as express from 'express';
+import errorHandler from './middlewares/errorHandler';
 import routerLogin from './routes/loginRouter';
 
 class App {
@@ -28,6 +29,10 @@ class App {
 
   private router():void {
     this.app.use(routerLogin);
+  }
+
+  private errorHandler():void {
+    this.app.use(errorHandler);
   }
 
   // ...
