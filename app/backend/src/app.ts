@@ -11,6 +11,7 @@ class App {
     this.app = express();
     this.config();
     this.router();
+    this.errorHandler();
     // ...
   }
 
