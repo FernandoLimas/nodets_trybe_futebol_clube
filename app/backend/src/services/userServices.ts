@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs';
+import { readFile } from 'fs/promises';
 import * as JWT from 'jsonwebtoken';
 // import * as bcrypt from 'bcrypt';
 import Users from '../database/models/Users';
@@ -21,7 +21,7 @@ export default class LoginService {
       role: hasUser.role,
     };
 
-    const secretKey = readFileSync('jwt.evaluation.key', 'utf-8');
+    const secretKey = await readFile('./jwt.evaluation.key', 'utf-8');
 
     const token = JWT.sign({ data: hasUser.role }, secretKey, { expiresIn: '2h' });
 

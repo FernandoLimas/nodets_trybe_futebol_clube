@@ -1,28 +1,30 @@
 import { Request, Response, NextFunction } from 'express';
 import * as JWT from 'jsonwebtoken';
-import { readFileSync } from 'fs';
+import { readFile } from 'fs/promises';
 
 const Auth = {
   private: async (req: Request, res: Response, next: NextFunction) => {
     let success = false;
-    const secretKey = readFileSync('jwt.evaluation.key', 'utf-8');
+    const secretKey = await readFile('./jwt.evaluation.key', 'utf-8');
 
     if (req.headers.authorization) {
-      const [, token] = req.headers.authorization;
+      const [authType, token] = req.headers.authorization.split(' ');
+      if (authType === 'Bearer') {
+        // try {
+        const decoded = JWT.verify(token, secretKey as string);
 
-      // try {
-      const decoded = JWT.verify(token, secretKey as string);
+        console.log(decoded);
 
-      if (decoded) {
-        success = true;
+        if (decoded) {
+          success = true;
+        }
+        // } catch (error) {}
       }
-      // } catch (error) {}
     }
     if (success) {
-      next();
-    } else {
-      res.status(403).json({ error: 'Não autorizado.' });
+      return next();
     }
+    res.status(403).json({ error: 'Não autorizado.' });
   },
 };
 
