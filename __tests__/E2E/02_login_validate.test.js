@@ -32,7 +32,7 @@ afterEach(async () => {
   await termBrowser(browser);
 });
 
-describe.only(getRequirement(5), () => {
+describe(getRequirement(5), () => {
   it('O avaliador verificará se é possível fazer o login com dados corretos e que após o acesso será redirecionado para a tela de jogos', async () => {
     await page.waitForTimeout(puppeteerDefs.pause.brief);
 

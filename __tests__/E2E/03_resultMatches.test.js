@@ -31,7 +31,7 @@ afterEach(async () => {
   await termBrowser(browser);
 });
 
-describe(getRequirement(16), () => {
+describe.only(getRequirement(16), () => {
   it('O avaliador verificará se tentar fazer a requisição correta na sua API, os dados corretos são retornados', async () => {
     const expectedResult = [
       {
