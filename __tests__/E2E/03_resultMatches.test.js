@@ -114,7 +114,7 @@ describe.only(getRequirement(16), () => {
   });
 });
 
-describe(getRequirement(17), () => {
+describe.only(getRequirement(17), () => {
   it('O avaliador verificará se tentar fazer a requisição correta na sua API, os dados corretos são retornados', async () => {
     const expectedResult = {
       "id": 5,
