@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import teamsController from '../controllers/teamsController';
+import * as teamsController from '../controllers/teamsController';
 
 const teamsRouter = Router();
 
-teamsRouter.get('/teams', teamsController);
+teamsRouter.get('/teams', teamsController.allTeamsController);
+teamsRouter.get('/teams/:id', teamsController.teamsById);
 
 export default teamsRouter;
