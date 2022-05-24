@@ -22,4 +22,18 @@ export default class MatchesService {
 
     return matchsAll;
   }
+
+  public static async getFilterQuery(filterName: string, filterValue: string | boolean | number) {
+    const matchsAll = Matches.findAll(
+      {
+        where: { [filterName]: filterValue },
+        include: [
+          { model: Teams, as: 'teamHome', attributes: { exclude: ['id'] } },
+          { model: Teams, as: 'teamAway', attributes: { exclude: ['id'] } },
+        ],
+      },
+    );
+    if (!matchsAll) { return null; }
+    return matchsAll;
+  }
 }
