@@ -10,7 +10,7 @@ const { expect } = chai;
 describe('Test router Login', () => {
   let chaiHttpResponse: Response;
 
-  it('Login not password', () => {
+  it('Should login not password', () => {
     chai.request(app)
     .post('/login')
     .send({ email: 'admin@admin.com' })
@@ -18,7 +18,7 @@ describe('Test router Login', () => {
       chai.expect(res).to.have.status(400);})
     })
 
-  it('Login success', () => {
+  it('Should login success', () => {
     chai.request(app)
     .post('/login')
     .send({ email: 'admin@admin.com', password: 'secret_admin' })
@@ -27,7 +27,7 @@ describe('Test router Login', () => {
     })
 
 
-  it('Login email empty', () => {
+  it('Should login email empty', () => {
     chai.request(app)
     .post('/login')
     .send({ email: ' ' , password: 'secret_admin' })
