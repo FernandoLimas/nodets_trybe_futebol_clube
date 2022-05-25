@@ -3,6 +3,7 @@ import errorHandler from './middlewares/errorHandler';
 import routerLogin from './routes/loginRouter';
 import routerTeams from './routes/teamsRouter';
 import routerMatches from './routes/matchesRouter';
+import routerLeaderBoard from './routes/leaderBorderRouter';
 
 class App {
   public app: express.Express;
@@ -34,6 +35,7 @@ class App {
     this.app.use(routerLogin);
     this.app.use(routerTeams);
     this.app.use(routerMatches);
+    this.app.use(routerLeaderBoard);
   }
 
   private errorHandler():void {
