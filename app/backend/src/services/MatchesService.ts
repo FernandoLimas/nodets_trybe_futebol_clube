@@ -61,4 +61,15 @@ export default class MatchesService {
 
     return createMatch;
   }
+
+  // Updates inProgress true to false
+  public static async finishMatch(id: string) {
+    const finishById = await Matches.update({
+      inProgress: false,
+    }, {
+      where: { id },
+    });
+
+    return finishById;
+  }
 }
