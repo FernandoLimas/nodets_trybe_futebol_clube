@@ -36,4 +36,22 @@ export default class MatchesService {
     if (!matchsAll) { return null; }
     return matchsAll;
   }
+
+  public static async createMatches(
+    hTeam:number,
+    hTeamGoals:number,
+    aTeam:number,
+    aTeamGoals:number,
+  ) {
+    const inProgress = true;
+    const createMatch = await Matches.create({
+      homeTeam: hTeam,
+      homeTeamGoals: hTeamGoals,
+      awayTeam: aTeam,
+      awayTeamGoals: aTeamGoals,
+      inProgress,
+    });
+
+    return createMatch;
+  }
 }
