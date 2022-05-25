@@ -48,3 +48,11 @@ export const createMatches = async (req: Request, res: Response) => {
   }
   return res.status(201).json(createM);
 };
+
+export const finishMatch = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  await MService.finishMatch(id);
+
+  return res.status(200).json({ message: 'Finished' });
+};
