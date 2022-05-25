@@ -3,19 +3,17 @@ import LeaderBoardService from '../services/LeaderBoard';
 
 const leaderBoardService = new LeaderBoardService();
 
-export default class LeaderBoardController {
-  public static homeBoard = async (_req: Request, res: Response) => {
-    const result = await leaderBoardService.home();
-    return res.status(200).json(result);
-  };
+export const homeBoard = async (_req: Request, res: Response) => {
+  const response = await leaderBoardService.home();
+  return res.status(200).json(response);
+};
 
-  public static awayBoard = async (_req: Request, res: Response) => {
-    const result = await leaderBoardService.away();
-    return res.status(200).json(result);
-  };
+export const awayBoard = async (_req: Request, res: Response) => {
+  const response = await leaderBoardService.away();
+  return res.status(200).json(response);
+};
 
-  public static allMatchesBoard = async (_req: Request, res: Response) => {
-    const result = await leaderBoardService.allMatches();
-    return res.status(200).json(result);
-  };
-}
+export const allMatchesBoard = async (_req: Request, res: Response) => {
+  const response = await leaderBoardService.allMatches();
+  return res.status(200).json(response);
+};
