@@ -72,4 +72,13 @@ export default class MatchesService {
 
     return finishById;
   }
+
+  public static async updateScore(id: string, hTGoals: number, aTGoals: number) {
+    const updateScore = await Matches.update({
+      homeTeamGoals: hTGoals,
+      awayTeamGoals: aTGoals,
+    }, { where: { id } });
+
+    return updateScore;
+  }
 }
