@@ -29,7 +29,7 @@ describe('Test router Login', () => {
     it('Should field user is valid', () => {
       chai.request(app)
         .post('/login')
-        .send({ email: '1admin@admin.com', password: 'secret_admin' })
+        .send({ email: 'admin@admin.com', password: 'secret_admin' })
         .end((err, res) => {
           chai.expect(res).to.have.status(400);});
     })
