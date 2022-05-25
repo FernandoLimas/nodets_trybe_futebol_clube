@@ -56,3 +56,12 @@ export const finishMatch = async (req: Request, res: Response) => {
 
   return res.status(200).json({ message: 'Finished' });
 };
+
+export const updateScore = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { homeTeamGoals, awayTeamGoals } = req.body;
+
+  await MService.updateScore(id, homeTeamGoals, awayTeamGoals);
+
+  return res.status(200).json({ message: 'Updated' });
+};
