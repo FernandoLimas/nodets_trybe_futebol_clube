@@ -37,14 +37,14 @@ export const getFilterQuery = async (req: Request, res: Response, next: NextFunc
 };
 
 export const createMatches = async (req: Request, res: Response) => {
-  const { homeTeam, homeTeamGoals, awayTeam, awayTeamGoals } = req.body;
+  const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = req.body;
   if (homeTeam === awayTeam) {
     return res.status(401).json({
       message: 'It is not possible to create a match with two equal teams' });
-
-    const create = await MService.createMatches(homeTeam, homeTeamGoals, awayTeam, awayTeamGoals);
-    if (!create) {
-      return res.status(201).json(create);
+    const createM = await MService.createMatches(homeTeam, homeTeamGoals, awayTeam, awayTeamGoals);
+    if (!createM) {
+      return res.status(404).json({ message: 'There is no team with such id!' });
     }
+    return res.status(201).json(createM);
   }
 };
