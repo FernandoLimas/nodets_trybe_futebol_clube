@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import MatchesService from '../services/MatchesService';
+import MService from '../services/MatchesService';
 
 export const allMatchesController = async (_req: Request, res: Response) => {
-  const allMatches = await MatchesService.MatchesAll();
+  const allMatches = await MService.MatchesAll();
 
   res.status(200).json(allMatches);
 };
@@ -22,10 +22,10 @@ export const getFilterQuery = async (req: Request, res: Response, next: NextFunc
   if (keys.length === 1) {
     const key = keys[0];
     const value = typeString(query[key] as string);
-    const allMatches = await MatchesService.getFilterQuery(key, value);
+    const allMatches = await MService.getFilterQuery(key, value);
     return res.status(200).json(allMatches);
   }
-  let allMatches = await MatchesService.MatchesAll() as any[];
+  let allMatches = await MService.MatchesAll() as any[];
   keys.forEach((key) => {
     const value = typeString(query[key] as string);
     allMatches = allMatches.filter((element) => {
@@ -34,4 +34,17 @@ export const getFilterQuery = async (req: Request, res: Response, next: NextFunc
     });
   });
   return res.status(200).json(allMatches);
+};
+
+export const createMatches = async (req: Request, res: Response) => {
+  const { homeTeam, homeTeamGoals, awayTeam, awayTeamGoals } = req.body;
+  if (homeTeam === awayTeam) {
+    return res.status(401).json({
+      message: 'It is not possible to create a match with two equal teams' });
+
+    const create = await MService.createMatches(homeTeam, homeTeamGoals, awayTeam, awayTeamGoals);
+    if (!create) {
+      return res.status(201).json(create);
+    }
+  }
 };
