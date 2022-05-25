@@ -1,5 +1,6 @@
 import Teams from '../database/models/Teams';
 import Matches from '../database/models/Matches';
+import { Op } from 'sequelize';
 
 export default class MatchesService {
   public static async MatchesAll() {
@@ -37,18 +38,16 @@ export default class MatchesService {
     return matchsAll;
   }
 
-  public static async createMatches(
-    hTeam:number,
-    hTeamGoals:number,
-    aTeam:number,
-    aTeamGoals:number,
-  ) {
+  public static async createMatches(hTeam:number, hTGoals:number, aTeam:number, aTGoals:number) {
     const inProgress = true;
+    const { count } = await Teams.findAndCountAll({
+
+    });
     const createMatch = await Matches.create({
       homeTeam: hTeam,
-      homeTeamGoals: hTeamGoals,
+      homeTeamGoals: hTGoals,
       awayTeam: aTeam,
-      awayTeamGoals: aTeamGoals,
+      awayTeamGoals: aTGoals,
       inProgress,
     });
 
