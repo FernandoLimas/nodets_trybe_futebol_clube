@@ -15,11 +15,11 @@ describe('Test router Matches', () => {
       chai.expect(res).to.have.status(200);})
     })
   
-  it('Should all matches error', () => {
-    chai.request(app)
-    .get('/teams')
-    .end((err, res) => {
-      chai.expect(res).to.have.status(400);})
-    })
+  // it('Should all matches error', () => {
+  //   chai.request(app)
+  //   .get('/teams')
+  //   .end((err, res) => {
+  //     chai.expect(res).to.have.status(400);})
+  //   })
 
 })

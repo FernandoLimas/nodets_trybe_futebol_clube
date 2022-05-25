@@ -26,6 +26,14 @@ describe('Test router Login', () => {
       chai.expect(res).to.have.status(200);})
     })
 
+    it('Should field user is valid', () => {
+      chai.request(app)
+        .post('/login')
+        .send({ email: '1admin@admin.com', password: 'secret_admin' })
+        .end((err, res) => {
+          chai.expect(res).to.have.status(400);});
+    })
+
 
   it('Should login email empty', () => {
     chai.request(app)
