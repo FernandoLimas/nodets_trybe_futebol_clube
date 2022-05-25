@@ -41,19 +41,19 @@ export default class ScoreBoardService {
     return this.sortResults(results);
   }
 
-  public async allGames() {
+  public async allMatches() {
     const allMatches = await Matches.findAll();
     const allTeams = await Teams.findAll();
     const results: ScoreBoard[] = [];
     allTeams.forEach((team) => {
-      let homeGames = allMatches
+      let teamMatch = allMatches
         .filter((match) => match.homeTeam === team.id && match.inProgress === false)
         .map((match) => ({ goalsFavor: match.homeTeamGoals, goalsOwn: match.awayTeamGoals }));
       const awayGames = allMatches
         .filter((match) => match.awayTeam === team.id && match.inProgress === false)
         .map((match) => ({ goalsFavor: match.awayTeamGoals, goalsOwn: match.homeTeamGoals }));
-      homeGames = [...homeGames, ...awayGames];
-      const result = new ScoreBoard({ teamName: team.teamName, matches: homeGames });
+      teamMatch = [...teamMatch, ...awayGames];
+      const result = new ScoreBoard({ teamName: team.teamName, matches: teamMatch });
       results.push(result);
     });
     return this.sortResults(results);
