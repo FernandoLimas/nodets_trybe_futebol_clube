@@ -24,7 +24,9 @@ export const ValidateLogin = async (req: Request, res: Response) => {
   console.log(token);
 
   if (!token) return res.status(400).json({ message: 'Token not found' });
+
   const secretKey = await readFile('jwt.evaluation.key', 'utf-8');
+
   const decoded = JWT.verify(token, secretKey) as ILogin;
 
   if (decoded.data) {
